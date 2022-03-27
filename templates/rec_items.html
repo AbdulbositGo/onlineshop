@@ -13,7 +13,7 @@
                         <a href="{% url 'product-detail' product_id=product.id slug=product.slug %}" class="img-wrap"> <img src="{% get_media_prefix %}{{product.image}}"> </a>
                         <figcaption class="info-wrap">
                             <ul class="rating-stars mb-1">
-                                <li style="width:{{ product.get_rating_precent }}%" class="stars-active">
+                                <li style="width:100%" class="stars-active">
                                     <img src="{% static "images/icons/stars-active.svg" %}" alt="">
                                 </li>
                                 <li>
