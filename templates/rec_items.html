@@ -1,0 +1,34 @@
+{% load static %}
+
+{% if products.count > 0 %}
+    <section class="padding-bottom">
+        <header class="section-heading mb-4">
+            <h3 class="title-section">Recommended items</h3>
+        </header>
+
+        <div class="row">
+            {% for product in products %}
+                <div class="col-xl-3 col-lg-3 col-md-4 col-6">
+                    <div class="card card-product-grid">
+                        <a href="{% url 'product-detail' product_id=product.id slug=product.slug %}" class="img-wrap"> <img src="{% get_media_prefix %}{{product.image}}"> </a>
+                        <figcaption class="info-wrap">
+                            <ul class="rating-stars mb-1">
+                                <li style="width:{{ product.get_rating_precent }}%" class="stars-active">
+                                    <img src="{% static "images/icons/stars-active.svg" %}" alt="">
+                                </li>
+                                <li>
+                                    <img src="{% static "images/icons/starts-disable.svg" %}" alt="">
+                                </li>
+                            </ul>
+                            <div>
+                                <a href="#" class="text-muted">{{ product.category.category }}</a>
+                                <a href="{% url 'product-detail' product_id=product.id slug=product.slug %}" class="title">{{ product.name }}</a>
+                            </div>
+                            <div class="price h5 mt-2">{{ product.price }}</div> <!-- price.// -->
+                        </figcaption>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endif %}

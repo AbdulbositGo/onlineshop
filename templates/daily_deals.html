@@ -1,0 +1,28 @@
+{% load static %}
+
+{% if daily_products.count > 0 %}
+<section class="padding-bottom">
+	<header class="section-heading mb-4">
+		<h3 class="title-section">Daily deals</h3>
+	</header>
+
+	<div class="row row-sm">
+		{% for daily_product in daily_products %}
+			<div class="col-xl-2 col-lg-3 col-md-4 col-6">
+				<div href="" class="card card-sm card-product-grid">
+					<a href="{% url 'product-detail' product_id=daily_product.id slug=daily_product.slug %}" class="img-wrap">
+						<b class="badge badge-danger mr-1"></b>
+						<img src="{% get_media_prefix %}{{ daily_product.image }}">
+					</a>
+					<figcaption class="info-wrap">
+						<a href="{% url 'product-detail' product_id=daily_product.id slug=daily_product.slug %}" class="title">{{ daily_product.name | truncatechars:40 }}</a>
+						<div class="price-wrap">
+							<span class="price">{{daily_product.price}}</span>
+						</div> 
+					</figcaption>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+</section>
+{% endif %}
