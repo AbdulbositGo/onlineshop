@@ -45,7 +45,6 @@ def subcategory_product(request, category_slug, subcategory_slug):
     return render(request, "store.html", context)
 
 
-
 def product_detail_view(request, product_id, slug):
     product_detail = Product.objects.filter(id=product_id, slug=slug).first()
     context = {

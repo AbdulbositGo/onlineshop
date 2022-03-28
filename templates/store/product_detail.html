@@ -86,16 +86,16 @@
                             <div class="form-group col-md flex-grow-0">
                                 <div class="input-group mb-3 input-spinner">
                                     <div class="input-group-prepend">
-                                        <button class="btn btn-light" type="button" id="button-plus"> + </button>
+                                        <button class="btn btn-light" type="button" id="button-plus"> &minus; </button>
                                     </div>
                                     <input type="text" class="form-control" value="1">
                                     <div class="input-group-append">
-                                        <button class="btn btn-light" type="button" id="button-minus"> &minus; </button>
+                                        <button class="btn btn-light" type="button" id="button-minus"> &plus; </button>
                                     </div>
                                 </div>
                             </div> <!-- col.// -->
                             <div class="form-group col-md">
-                                <a href="#" class="btn  btn-primary">
+                                <a href="{% url 'add-item' product_id=product_detail.id %}" class="btn  btn-primary">
                                     <i class="fas fa-shopping-cart"></i> <span class="text">Add to cart</span>
                                 </a>
                                 <a href="#" class="btn btn-light">
