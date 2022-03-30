@@ -63,5 +63,5 @@ class Product(models.Model):
 
     
     def is_new_product(self):
-        time_delta = datetime.now()- self.created.replace(tzinfo=None)
+        time_delta = datetime.now() - self.created.replace(tzinfo=None)
         return time_delta.days < 4

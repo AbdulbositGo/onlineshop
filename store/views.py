@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator
 
 from .models import *
 from .utils import min_max_filter
@@ -15,6 +16,7 @@ def home_view(request):
 def store_view(request):
     store_products = Product.objects.all().order_by("-created")
     store_products = min_max_filter(request, store_products) 
+   
     context = {
         "store_products": store_products,
     }

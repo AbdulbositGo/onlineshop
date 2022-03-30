@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     'store',
     'shopping',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +61,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             os.path.join(BASE_DIR, "templates/store"),
-            os.path.join(BASE_DIR, "templates/shopping")
+            os.path.join(BASE_DIR, "templates/shopping"),
+            os.path.join(BASE_DIR, "templates/accounts"),
             ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -76,7 +78,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'onlineshop.wsgi.application'
-
+AUTH_USER_MODEL = 'accounts.Accounts'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

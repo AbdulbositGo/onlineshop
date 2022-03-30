@@ -12,6 +12,9 @@
 				<div href="" class="card card-sm card-product-grid">
 					<a href="{% url 'product-detail' product_id=daily_product.id slug=daily_product.slug %}" class="img-wrap">
 						<b class="badge badge-danger mr-1"></b>
+						{% if daily_product.is_new_product %}
+							<span class="badge badge-danger"> NEW </span>
+						{% endif %}
 						<img src="{% get_media_prefix %}{{ daily_product.image }}">
 					</a>
 					<figcaption class="info-wrap">

@@ -8,12 +8,13 @@ from .models import *
 def get_cart(request):
     session_id = request.session.session_key
     if not session_id:
-        session_id = request.session.create()
+        session_id = request.session.create().save()
 
     cart = Cart.objects.filter(session_id=session_id).first()
     if not cart:
         cart = Cart(session_id=session_id).save()
-    
+        cart = Cart.objects.filter(session_id=session_id).first()
+
     return cart
 
 
@@ -29,6 +30,7 @@ def add_item_view(request, product_id):
         else:
             product_price = product.price
             cart_item = CartItem(product=product, cart=cart, price=product_price)
+        
         cart_item.save()
 
     return redirect(reverse("cart"))
