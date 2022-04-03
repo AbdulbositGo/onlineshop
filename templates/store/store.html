@@ -89,7 +89,7 @@
                     
                     <header class="mb-3">
                         <div class="form-inline">
-                            <strong class="mr-md-auto">{{ store_products | length }} Items found </strong>
+                            <strong class="mr-md-auto">{{ products_len }} Items found </strong>
                             <select class="mr-2 form-control">
                                 <option>Latest items</option>
                                 <option>Trending</option>
@@ -103,7 +103,7 @@
                             </div>
                         </div>
                     </header>
-                    {% for store_product in store_products %}
+                    {% for store_product in paginator_products.object_list %}
                         <article class="card card-product-list">
                             <div class="row no-gutters">
                                 <aside class="col-md-3">
@@ -166,16 +166,20 @@
                             </div>
                         </article>
                     {% endfor %}
-                  
-
                     <nav class="mb-4" aria-label="Page navigation sample">
                         <ul class="pagination">
-                            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item"><a class="page-link" href="#">Last</a></li>
+                            <li class="page-item {% if not paginator_products.has_previous %} disabled {% endif %}"><a class="page-link" href="?page=1">&laquo; First</a></li>
+                            {% if paginator_products.has_previous %}
+                                <li class="page-item"><a class="page-link" href="?page={{ paginator_products.previous_page_number }}">Previous</a></li>
+                            {% endif %}
+                            {% for num in paginator.page_range  %}
+                                <li class="page-item {% if num == paginator_products.number %}active{% endif %}"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                            {% endfor %}
+                            {% if paginator_products.has_next %}
+                                <li class="page-item"><a class="page-link" href="?page={{paginator_products.next_page_number}}">Next</a></li>
+                            {% endif %}
+                            <li class="page-item {% if not paginator_products.has_next %} disabled {% endif %}"><a class="page-link" href="?page={{ paginator_products.paginator.num_pages }}">Last &raquo;</a></li>
+                            
                         </ul>
                     </nav>
                 </main>
@@ -189,7 +193,6 @@
                             </article>
                         </div>
                     </section>
-              
             </div>
         </div>
 </section>

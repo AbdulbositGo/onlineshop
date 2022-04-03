@@ -8,13 +8,12 @@ from .models import *
 def get_cart(request):
     session_id = request.session.session_key
     if not session_id:
-        session_id = request.session.create().save()
+        session_id = request.session.create()
 
     cart = Cart.objects.filter(session_id=session_id).first()
     if not cart:
         cart = Cart(session_id=session_id).save()
         cart = Cart.objects.filter(session_id=session_id).first()
-
     return cart
 
 

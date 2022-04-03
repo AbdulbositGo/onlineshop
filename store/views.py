@@ -15,10 +15,18 @@ def home_view(request):
 
 def store_view(request):
     store_products = Product.objects.all().order_by("-created")
-    store_products = min_max_filter(request, store_products) 
-   
+    store_products = min_max_filter(request, store_products)
+    products_len = len(store_products)
+    print(products_len)
+    # paginator
+    paginator = Paginator(store_products, 5)
+    page = request.GET.get("page")
+    paginator_products = paginator.get_page(page)
+    # end paginator
     context = {
-        "store_products": store_products,
+        "paginator_products": paginator_products,
+        "products_len": products_len,
+        "paginator": paginator
     }
 
     return render(request, "store.html", context)
