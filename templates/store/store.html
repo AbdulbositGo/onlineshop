@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% load static %}
 
+{% load static %}
 
 {% block main %}
 
@@ -86,7 +86,8 @@
                 </aside>
                
                 <main class="col-md-10">
-                    
+                    {% if products_len > 0 %}
+
                     <header class="mb-3">
                         <div class="form-inline">
                             <strong class="mr-md-auto">{{ products_len }} Items found </strong>
@@ -107,7 +108,7 @@
                         <article class="card card-product-list">
                             <div class="row no-gutters">
                                 <aside class="col-md-3">
-                                    <a href="#" class="img-wrap">
+                                    <a href="{% url 'product-detail' store_product.id store_product.slug %}" class="img-wrap">
                                         {% if store_product.is_new_product %}
                                             <span class="badge badge-danger"> NEW </span>
                                         {% endif %}
@@ -166,33 +167,36 @@
                             </div>
                         </article>
                     {% endfor %}
+
+
                     <nav class="mb-4" aria-label="Page navigation sample">
                         <ul class="pagination">
-                            <li class="page-item {% if not paginator_products.has_previous %} disabled {% endif %}"><a class="page-link" href="?page=1">&laquo; First</a></li>
+                            <li class="page-item {% if not paginator_products.has_previous %} disabled {% endif %}"><a class="page-link" href="{% if query_string %}{{ request.get_full_path }}&{% else %}?{% endif %}page=1">&laquo; First</a></li>
                             {% if paginator_products.has_previous %}
-                                <li class="page-item"><a class="page-link" href="?page={{ paginator_products.previous_page_number }}">Previous</a></li>
+                                <li class="page-item"><a class="page-link" href="{% if query_string %}{{ request.get_full_path }}&{% else %}?{% endif %}page={{ paginator_products.previous_page_number }}">Previous</a></li>
                             {% endif %}
-                            {% for num in paginator.page_range  %}
-                                <li class="page-item {% if num == paginator_products.number %}active{% endif %}"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                            {% for num in pages.page_range  %}
+                                <li class="page-item {% if num == paginator_products.number %}active{% endif %}"><a class="page-link" href="{% if query_string %}{{ request.get_full_path }}&{% else %}?{% endif %}page={{ num }}">{{ num }}</a></li>
                             {% endfor %}
                             {% if paginator_products.has_next %}
-                                <li class="page-item"><a class="page-link" href="?page={{paginator_products.next_page_number}}">Next</a></li>
+                                <li class="page-item"><a class="page-link" href="{% if query_string %}{{ request.get_full_path }}&{% else %}?{% endif %}page={{paginator_products.next_page_number}}">Next</a></li>
                             {% endif %}
-                            <li class="page-item {% if not paginator_products.has_next %} disabled {% endif %}"><a class="page-link" href="?page={{ paginator_products.paginator.num_pages }}">Last &raquo;</a></li>
-                            
+                            <li class="page-item {% if not paginator_products.has_next %} disabled {% endif %}"><a class="page-link" href="{% if query_string %}{{ request.get_full_path }}&{% else %}?{% endif %}page={{ paginator_products.paginator.num_pages }}">Last &raquo;</a></li>  
                         </ul>
                     </nav>
+                    {% else %}
+                        <section class="section-content padding-y">
+                            <div class="container">
+                                <header class="section-heading">
+                                    <h2 class="section-title">Mahsulot topilmadi</h2>
+                                </header>
+                                <article>
+                                    <p>Iltimos qidiruvni davom ettirish uchun <a href="{% url 'store' %}">mahsulotlar</a> qatoriga qayting</p>
+                                </article>
+                            </div>
+                        </section>
+                    {% endif %}
                 </main>
-                    <section class="section-content padding-y">
-                        <div class="container">
-                            <header class="section-heading">
-                                <h2 class="section-title">Mahsulot topilmadi</h2>
-                            </header>
-                            <article>
-                                <p>Iltimos qidiruvni davom ettirish uchun <a href="">Bosh sahifa</a>ga qayting</p>
-                            </article>
-                        </div>
-                    </section>
             </div>
         </div>
 </section>

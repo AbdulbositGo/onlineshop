@@ -4,7 +4,6 @@
 
 {% block main %}
 
-
 {% if cart_items %}
     <section class="section-content padding-y">
         <div class="container">
@@ -38,7 +37,7 @@
                                         <div class="form-group col-md flex-grow-0">
                                             <div class="input-group mb-3 input-spinner">
                                                 <div class="input-group-prepend">
-                                                    <a class="btn btn-light" href="{% url 'remove-item' product_id=cart_item.product.id %}" type="button" id="button-minus"> &minus; </a>
+                                                    <a class="btn btn-light" href="{% url 'reduce-item' product_id=cart_item.product.id %}" type="button" id="button-minus"> &minus; </a>
                                                 </div>
                                                 <input type="text" class="form-control" value="{{ cart_item.quantity }}">
                                                 <div class="input-group-append">
@@ -107,7 +106,7 @@
                             </dl>
                             <hr>
                             <p class="text-center mb-3">
-                                <img src="images/misc/payments.png" height="26">
+                                <img src="{% static 'images/misc/payments.png' %}" height="26">
                             </p>
 
                         </div> <!-- card-body.// -->
@@ -116,11 +115,11 @@
             </div>
 
         </div> <!-- container .//  -->
-    </section>
+    </section>  
 {% else %}
     <section class="section-content padding-y bg">
         <div class="container">   
-            <p>Siz hali mahsulot qoshmadingiz mahsulotlarni ko'rish uchun <a href="{% url 'home' %}" >Bosh sahifa</a>ga qayting</p>
+            <p>Siz hali mahsulot qoshmadingiz mahsulotlarni ko'rish uchun <a href="{% url 'store' %}" >Bosh sahifa</a>ga qayting</p>
             <br><br>
     
     

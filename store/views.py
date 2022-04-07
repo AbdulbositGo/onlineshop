@@ -1,8 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from django.core.paginator import Paginator
 
 from .models import *
-from .utils import min_max_filter
+from .utils import *
 
 
 def home_view(request):
@@ -15,18 +14,18 @@ def home_view(request):
 
 def store_view(request):
     store_products = Product.objects.all().order_by("-created")
-    store_products = min_max_filter(request, store_products)
-    products_len = len(store_products)
-    print(products_len)
-    # paginator
-    paginator = Paginator(store_products, 5)
-    page = request.GET.get("page")
-    paginator_products = paginator.get_page(page)
-    # end paginator
+    store_products = search_item(request, store_products)
+    
+    query_string = False
+    if request.GET:
+        query_string = True
+    paginated = get_paginated(request, store_products, 3)
+
     context = {
-        "paginator_products": paginator_products,
-        "products_len": products_len,
-        "paginator": paginator
+        "paginator_products": paginated["items"],
+        "products_len": paginated["items_len"],
+        "pages": paginated["pages"],
+        "query_string": query_string
     }
 
     return render(request, "store.html", context)

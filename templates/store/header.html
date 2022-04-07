@@ -28,16 +28,14 @@
                     </li>
                     <li><a href="#" class="nav-link"> My shop </a></li>
                     <li><a href="#" class="nav-link"> <i class="fa fa-bell"></i> </a></li>
-                    <li><a href="#" class="nav-link"> <i class="fa fa-shopping-cart"></i> </a></li>
-                </ul> <!-- list-inline //  -->
-            </div> <!-- navbar-collapse .// -->
-        </div> <!-- container //  -->
+                    <li><a href="{% url "cart" %}" class="nav-link">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span class="badge badge-pill badge-danger">{{items_quantity}}</span>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
-
-
-
-
-
 
 
 
@@ -46,7 +44,7 @@
         <section class="header-main border-bottom">
             <div class="row row-sm">
                 <div class="col-6 col-sm col-md col-lg  flex-grow-0">
-                    <a href="" class="brand-wrap">
+                    <a href="{% url 'home' %}" class="brand-wrap">
                         <img class="logo" src="{% static "images/logo.svg" %}">
                     </a> <!-- brand-wrap.// -->
                 </div>
@@ -77,20 +75,20 @@
                     </div> <!-- category-wrap.// -->
                 </div> <!-- col.// -->
                 <div class="col-lg-6 col-xl col-md-5 col-sm-12 flex-grow-1">
-                    <form action="#" class="search-header">
+                    <form action="#" class="search-header" >
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search">
-                            <select class="custom-select border-left" name="category_name">
+                            <input type="text" name="search" class="form-control" placeholder="Search">
+                            <select class="custom-select border-left">
                                 <option value="">All type</option>
                                 <option value="codex">Special</option>
                                 <option value="comments">Only best</option>
                                 <option value="content">Latest</option>
                             </select>
                         </div>
-                    </form> <!-- search-wrap .end// -->
-                </div> <!-- col.// -->
+                    </form>
+                </div>
                 <div class="col col-lg col-md flex-grow-0">
-                    <button class="btn btn-block btn-primary" type="submit"> Search </button>
+                    <button class="btn btn-block btn-primary" form="" type="submit"> Search </button>
                 </div>
                 <div class="col col-lg col-md flex-grow-0">
                     <button class="btn btn-block btn-light" type="submit"> Advanced </button>
