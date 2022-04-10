@@ -27,12 +27,11 @@
                             <div class="img-big-wrap">
                                 <div> <a href="#"><img src="{% get_media_prefix %}{{ product_detail.image }}"></a></div>
                             </div> <!-- slider-product.// -->
-                            <!-- <div class="thumbs-wrap">
-                                <a href="#" class="item-thumb"> <img src="images/items/15.jpg"></a>
-                                <a href="#" class="item-thumb"> <img src="images/items/15-1.jpg"></a>
-                                <a href="#" class="item-thumb"> <img src="images/items/15-2.jpg"></a>
-                                <a href="#" class="item-thumb"> <img src="images/items/15-1.jpg"></a>
-                            </div> -->
+                            <div class="thumbs-wrap">
+                                {% for product_image in product_detail.product_images.all %}
+                                    <a href="#" class="item-thumb"> <img src="{% get_media_prefix %}{{product_image.image}}"></a>
+                                {% endfor %}    
+                            </div> 
                         </article> <!-- gallery-wrap .end// -->
                     </div> <!-- card.// -->
                 </aside>

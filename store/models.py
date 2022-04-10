@@ -65,3 +65,16 @@ class Product(models.Model):
     def is_new_product(self):
         time_delta = datetime.now() - self.created.replace(tzinfo=None)
         return time_delta.days < 4
+    
+    
+class ProductColor(models.Model):
+    name = models.CharField(max_length=50)
+    
+
+class ProductSize(models.Model):
+    name = models.CharField(max_length=20)
+    
+    
+class ProductImage(models.Model):
+    image = models.ImageField(upload_to="media/uploadmorephotos")
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_images")

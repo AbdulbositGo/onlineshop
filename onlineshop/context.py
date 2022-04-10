@@ -1,5 +1,4 @@
 from store.models import Category, SubCategory, Product
-from shopping.models import *
 from shopping.utils import *
 
 def need_context(request):
